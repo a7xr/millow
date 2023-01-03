@@ -52,4 +52,11 @@ describe("Escrow", () => {
       expect(result).to.be.equal(lender.address);
     });
   });
+
+  describe("Listing", () => {
+    it("Updates ownership", async () => {
+      const result = await escrow.nftAddress();
+      expect(result).to.be.equal(escrow.address);
+    });
+  });
 });
