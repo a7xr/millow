@@ -7,11 +7,12 @@ const tokens = (n) => {
 
 describe("Escrow", () => {
   let buyer, seller, inspector, lender;
-  it("saves the addresses", async () => {
+
+  beforeEach(async () => {
     [buyer, seller, inspector, lender] = await ethers.getSigners();
     const RealEstate = await ethers.getContractFactory("RealEstate");
     realEstate = await RealEstate.deploy();
-    console.log(realEstate.address);
+    // console.log(realEstate.address);
 
     //  https://ipfs.io/ipfs/QmTudSYeM7mz3PkYEWXWqPjomRPHogcMFSq7XAvsvsgAPS
     let transaction = await realEstate
@@ -28,11 +29,27 @@ describe("Escrow", () => {
       inspector.address,
       lender.address
     );
+  });
 
-    let result = await escrow.nftAddress();
-    expect(result).to.be.equal(realEstate.address);
+  describe("Deployment", () => {
+    it("Returns NFT Address", async () => {
+      const result = await escrow.nftAddress();
+      expect(result).to.be.equal(realEstate.address);
+    });
 
-    result = await escrow.seller();
-    expect(result).to.be.equal(seller.address);
+    it("Returns Seller", async () => {
+      result = await escrow.seller();
+      expect(result).to.be.equal(seller.address);
+    });
+
+    it("Returns Inspector", async () => {
+      result = await escrow.inspector();
+      expect(result).to.be.equal(inspector.address);
+    });
+
+    it("Returns Lender", async () => {
+      result = await escrow.lender();
+      expect(result).to.be.equal(lender.address);
+    });
   });
 });
