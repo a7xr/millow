@@ -14,11 +14,18 @@ import Escrow from "./abis/Escrow.json";
 import config from "./config.json";
 
 function App() {
+  const [provider, setProvider] = useState(null);
   const [home, setHome] = useState({});
   const [account, setAccount] = useState(null);
 
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(provider);
+    const network = await provider.getNetwork();
+    console.log(
+      config[network.chainId].realEstate.address,
+      config[network.chainId].escrow.address
+    );
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
@@ -48,8 +55,7 @@ function App() {
             <div className="card__info">
               <h4>1 ETH</h4>
               <p>
-                <strong>1</strong> bds |
-                <strong>2</strong> ba |
+                <strong>1</strong> bds |<strong>2</strong> ba |
                 <strong>3</strong> sqft
               </p>
               <p>1234 St</p>
