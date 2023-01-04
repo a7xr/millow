@@ -18,7 +18,8 @@
     "eject": "react-scripts eject",
     "cc": "yarn hardhat clean; yarn hardhat compile --verbose",
     "ht": "yarn hardhat test",
-    "rsl": "yarn hardhat run scripts/deploy.js --network localhost"
+    "rsl": "yarn hardhat run scripts/deploy.js --network localhost",
+    "nrs": "yarn hardhat test"
   },
   "eslintConfig": {
     "extends": [
