@@ -25,6 +25,12 @@ const Home = ({ home, provider, escrow, togglePop }) => {
           </div>
 
           <button className="home__contact">Contact agent</button>
+
+          <hr />
+
+          <h2>Overview</h2>
+
+          <p>{home.description}</p>
         </div>
 
         <button onClick={togglePop} className="home__close">
