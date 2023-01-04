@@ -91,6 +91,8 @@ contract Escrow {
             ""
         );
         require(success);
+
+        IERC721(nftAddress).transferFrom(address(this), buyer[_nftID], _nftID);
     }
 
     // Update Inspection Status (only inspector)
