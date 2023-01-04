@@ -19,7 +19,7 @@
     "cc": "yarn hardhat clean; yarn hardhat compile --verbose",
     "ht": "yarn hardhat test",
     "rsl": "yarn hardhat run scripts/deploy.js --network localhost",
-    "nrs": "yarn hardhat test"
+    "nrs": "npm run start"
   },
   "eslintConfig": {
     "extends": [
