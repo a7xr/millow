@@ -23,6 +23,8 @@ const Home = ({ home, provider, escrow, togglePop }) => {
           <div>
             <button className="home__buy">Buy</button>
           </div>
+
+          <button className="home__contact">Contact agent</button>
         </div>
 
         <button onClick={togglePop} className="home__close">
