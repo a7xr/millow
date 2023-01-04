@@ -19,6 +19,7 @@ const Home = ({ home, provider, escrow, togglePop }) => {
             <strong>{home.attributes[4].value}</strong> sqft
           </p>
           <p>{home.address}</p>
+          <h2>{home.attributes[0].value} ETH</h2>
         </div>
 
         <button onClick={togglePop} className="home__close">
