@@ -10,6 +10,10 @@ const Home = ({ home, provider, escrow, togglePop }) => {
         <div className="home__image">
           <img src={home.image} alt="Home" />
         </div>
+
+        <button onClick={togglePop} className="home__close">
+          <img src={close} alt="Close" />
+        </button>
       </div>
     </div>
   );
