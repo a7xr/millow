@@ -74,6 +74,20 @@ contract Escrow {
         approval[_nftID][msg.sender] = true;
     }
 
+    // Finalize Sale
+    // -> Require inspection status (add more items here, like appraisal)
+    // -> Require sale to be authorized
+    // -> Require funds to be correct amount
+    // -> Transfer NFT to buyer
+    // -> Transfer Funds to Seller
+    function finalizeSale(uint256 _nftID) public {
+        require(inspectionPassed[_nftID]);
+        require(approval[_nftID][buyer[_nftID]]);
+        require(approval[_nftID][seller]);
+        require(approval[_nftID][lender]);
+        require(address(this).balance >= purchasePrice[_nftID]);
+    }
+
     // Update Inspection Status (only inspector)
     function updateInspectionStatus(uint256 _nftID, bool _passed)
         public
