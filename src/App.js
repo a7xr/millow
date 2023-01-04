@@ -40,7 +40,6 @@ function App() {
     }
 
     setHomes(homes);
-    console.log(homes);
 
     const escrow = new ethers.Contract(
       config[network.chainId].escrow.address,
@@ -70,19 +69,21 @@ function App() {
         <h3>Homes for you</h3>
         <hr />
         <div className="cards">
-          <div className="card">
-            <div className="card__image">
-              <img src={home.image} alt="Home" />
+          {homes.map((home, index) => (
+            <div className="card">
+              <div className="card__image">
+                <img src={home.image} alt="Home" />
+              </div>
+              <div className="card__info">
+                <h4>1 ETH</h4>
+                <p>
+                  <strong>1</strong> bds |<strong>2</strong> ba |
+                  <strong>3</strong> sqft
+                </p>
+                <p>1234 St</p>
+              </div>
             </div>
-            <div className="card__info">
-              <h4>1 ETH</h4>
-              <p>
-                <strong>1</strong> bds |<strong>2</strong> ba |
-                <strong>3</strong> sqft
-              </p>
-              <p>1234 St</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
