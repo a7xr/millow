@@ -31,8 +31,9 @@ function App() {
 
   return (
     <div>
+      <Navigation />
       <div className="cards__section">
-        <h3>Welcome to Millow !</h3>
+        <h3>Welcome to Millow !!</h3>
       </div>
     </div>
   );
