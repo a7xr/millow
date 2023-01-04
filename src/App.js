@@ -61,6 +61,12 @@ function App() {
     loadBlockchainData();
   }, []);
 
+  const togglePop = (home) => {
+    console.log(home);
+    // setHome(home);
+    // toggle ? setToggle(false) : setToggle(true);
+  };
+
   return (
     <div>
       <Navigation account={account} setAccount={setAccount} />
@@ -70,7 +76,7 @@ function App() {
         <hr />
         <div className="cards">
           {homes.map((home, index) => (
-            <div className="card" key={index}>
+            <div className="card" key={index} onClick={() => togglePop(home)}>
               <div className="card__image">
                 <img src={home.image} alt="Home" />
               </div>
