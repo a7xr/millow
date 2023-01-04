@@ -22,10 +22,17 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
     const network = await provider.getNetwork();
-    console.log(
+    const realEstate = new ethers.Contract(
       config[network.chainId].realEstate.address,
-      config[network.chainId].escrow.address
+      RealEstate,
+      provider
     );
+    const totalSupply = await realEstate.totalSupply();
+    console.log(totalSupply.toString());
+    // console.log(
+    //   config[network.chainId].realEstate.address,
+    //   config[network.chainId].escrow.address
+    // );
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
