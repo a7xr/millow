@@ -86,6 +86,11 @@ contract Escrow {
         require(approval[_nftID][seller]);
         require(approval[_nftID][lender]);
         require(address(this).balance >= purchasePrice[_nftID]);
+
+        (bool success, ) = payable(seller).call{value: address(this).balance}(
+            ""
+        );
+        require(success);
     }
 
     // Update Inspection Status (only inspector)

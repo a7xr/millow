@@ -162,6 +162,9 @@ describe("Escrow", () => {
       transaction = await escrow.connect(seller).finalizeSale(1);
       await transaction.wait();
     });
-    it("works", async () => {});
+
+    it("Updates balance", async () => {
+      expect(await escrow.getBalance()).to.be.equal(0);
+    });
   });
 });
