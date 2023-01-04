@@ -57,6 +57,14 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
     setOwner(owner);
   };
 
+  const buyHandler = async () => {};
+
+  const inspectHandler = async () => {};
+
+  const lendHandler = async () => {};
+
+  const sellHandler = async () => {};
+
   useEffect(() => {
     fetchDetails();
     fetchOwner();
