@@ -19,6 +19,7 @@ function App() {
   const [home, setHome] = useState({});
   const [account, setAccount] = useState(null);
   const [escrow, setEscrow] = useState(null);
+  const [toggle, setToggle] = useState(false);
 
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -62,9 +63,8 @@ function App() {
   }, []);
 
   const togglePop = (home) => {
-    console.log(home);
-    // setHome(home);
-    // toggle ? setToggle(false) : setToggle(true);
+    setHome(home);
+    toggle ? setToggle(false) : setToggle(true);
   };
 
   return (
@@ -93,6 +93,11 @@ function App() {
           ))}
         </div>
       </div>
+
+      {toggle && (
+          <Home/>
+        // <Home home={home} provider={provider} account={account} escrow={escrow} togglePop={togglePop} />
+      )}
     </div>
   );
 }
