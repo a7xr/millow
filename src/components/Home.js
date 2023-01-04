@@ -4,6 +4,25 @@ import { useEffect, useState } from "react";
 import close from "../assets/close.svg";
 
 const Home = ({ home, provider, escrow, togglePop }) => {
+  const [buyer, setBuyer] = useState(null);
+  const [lender, setLender] = useState(null);
+  const [inspector, setInspector] = useState(null);
+  const [seller, setSeller] = useState(null);
+
+  const fetchDetails = async () => {
+    const buyer = await escrow.buyer(home.id);
+    setBuyer(buyer);
+
+    const seller = await escrow.seller();
+    setSeller(seller);
+    
+    const lender = await escrow.lender();
+    setLender(lender);
+
+    const inspector = await escrow.inspector();
+    setInspector(inspector);
+
+  };
   return (
     <div className="home">
       <div className="home__details">
