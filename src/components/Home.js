@@ -57,13 +57,67 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
     setOwner(owner);
   };
 
-  const buyHandler = async () => {};
+  const buyHandler = async () => {
+    const escrowAmount = await escrow.escrowAmount(home.id);
+    const signer = await provider.getSigner();
 
-  const inspectHandler = async () => {};
+    // Buyer deposit earnest
+    let transaction = await escrow
+      .connect(signer)
+      .depositEarnest(home.id, { value: escrowAmount });
+    await transaction.wait();
 
-  const lendHandler = async () => {};
+    // Buyer approves...
+    transaction = await escrow.connect(signer).approveSale(home.id);
+    await transaction.wait();
 
-  const sellHandler = async () => {};
+    setHasBought(true);
+  };
+
+  const inspectHandler = async () => {
+    const signer = await provider.getSigner();
+
+    // Inspector updates status
+    const transaction = await escrow
+      .connect(signer)
+      .updateInspectionStatus(home.id, true);
+    await transaction.wait();
+
+    setHasInspected(true);
+  };
+
+  const lendHandler = async () => {
+    const signer = await provider.getSigner();
+    // Lender approves...
+    const transaction = await escrow.connect(signer).approveSale(home.id);
+    await transaction.wait();
+
+    // Lender sends funds to contract...
+    const lendAmount =
+      (await escrow.purchasePrice(home.id)) -
+      (await escrow.escrowAmount(home.id));
+    await signer.sendTransaction({
+      to: escrow.address,
+      value: lendAmount.toString(),
+      gasLimit: 60000,
+    });
+
+    setHasLended(true);
+  };
+
+  const sellHandler = async () => {
+    const signer = await provider.getSigner();
+
+    // Seller approves...
+    let transaction = await escrow.connect(signer).approveSale(home.id);
+    await transaction.wait();
+
+    // Seller finalize...
+    transaction = await escrow.connect(signer).finalizeSale(home.id);
+    await transaction.wait();
+
+    setHasSold(true);
+  };
 
   useEffect(() => {
     fetchDetails();
